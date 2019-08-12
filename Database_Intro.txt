@@ -1,0 +1,63 @@
+Create a new repository on GitHub to hold your assignments for the Databases module. Create a new branch for Checkpoint 1. Submit your answers.
+
+What data types do each of these values represent?
+
+"A Clockwork Orange" - String
+42 - INT	
+09/02/1945- Date
+98.7 - Float
+$15.99 - Varchar
+
+Explain when a database would be used. Explain when a text file would be used.
+Database is used when you need to store, calculate, and manipulate certain data. Text files can be used when you just need to store data but not really do anything with them
+
+
+Describe one difference between SQL and other programming languages.
+SQL is actually a merger of 4 different languages, and is a declarative rather than procedural language. 
+
+
+In your own words, explain how the pieces of a database system fit together at a high level.
+They're all just columns of stored data that you can place next to each other in various ways to gather conclusions and analysis.
+
+
+Explain the meaning of table, row, column, and value.
+Table is the entire thing with rows and columns and values
+Row is left to right - individual cases / users / purchases
+Column is up and down - What is stored
+Values is the merger between columns and rows.
+
+List three data types that can be used in a table.
+Int, String, Boolean
+
+Given this payments table, provide an English description of the following queries and include their results:
+
+     SELECT date, amount
+     FROM payments;
+Returns the date and amount columns in the payments table
+
+     SELECT amount
+     FROM payments
+     WHERE amount > 500;
+Returns the amounts where greater than 500 from the payments table
+
+     SELECT *
+     FROM payments
+     WHERE payee = 'Mega Foods';
+Returns the entire row  where payee is mega foods 
+Given this users table, write SQL queries using the following criteria and include the output:
+https://www.db-fiddle.com/f/iQAEYktwysXqcLQHv2dwbc/0
+
+The email and sign-up date for the user named DeAndre Data.
+SELECT email, signup
+FROM users
+WHERE name = "DeAndre Data";
+
+The user ID for the user with email 'aleesia.algorithm@uw.edu'.
+SELECT userid
+FROM users
+WHERE email = 'aleesia.algorithm@uw.edu';
+ 
+All the columns for the user ID equal to 4.
+SELECT *
+FROM users
+WHERE userid = 4
