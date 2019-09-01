@@ -1,0 +1,92 @@
+Answer the following questions and submit the responses.
+
+Write out a generic SELECT statement.
+SELECT name
+FROM table1
+WHERE name = 'Bob';
+
+Create a fun way to remember the order of operations in a SELECT statement, such as a mnemonic.
+Some
+Funny
+Worms
+
+Given this dogs table, write queries to select the following pieces of data:
+
+Intake teams typically guess the breed of shelter dogs, so the breed column may have multiple words (for example, "Labrador Collie mix").
+
+Display the name, gender, and age of all dogs that are part Labrador.
+SELECT name, gender, age
+FROM dogs
+WHERE breed LIKE '%labrador%';
+
+Display the ids of all dogs that are under 1 year old.
+SELECT id
+FROM dogs
+WHERE age < 1;
+
+Display the name and age of all dogs that are female and over 35lbs.
+SELECT name, age
+FROM dogs
+WHERE gender = 'F' 
+AND weight > 35;
+
+Display all of the information about all dogs that are not Shepherd mixes.
+SELECT *
+FROM dogs
+WHERE breed NOT LIKE '%Shepherd%';
+
+Display the id, age, weight, and breed of all dogs that are either over 60lbs or Great Danes.
+SELECT id, age, weight, breed
+FROM dogs
+WHERE weight >60 
+OR breed = '%Great Dane%';
+
+Given this cats table, what records are returned from these queries?
+
+SELECT name, adoption_date FROM cats;
+All names and adoption dates from cats table
+
+SELECT name, age FROM cats;
+All names and ages from cats table
+
+From the cats table, write queries to select the following pieces of data.
+
+Display all the information about all of the available cats.
+SELECT *
+From cats
+WHERE adoption_date = 'NULL';
+
+Display the name and sex of all cats who are 7 years old.
+SELECT name, age
+FROM cats
+WHERE age = 7
+
+Find all of the names of the cats, so you don’t choose duplicate names for new cats.
+SELECT name
+FROM cats;
+
+List each comparison operator and explain when you would use it. Include a real world example for each.
+If you can’t list these from memory, do these flashcards until you can!
+<   - Less than = if bank balance is less than amount transaction denied
+>   - Greater than = if blood pressure is greater than healthy range, visit doctor
+=   - Equals = if id = "5" then name is Bob
+<=  - Less than or Equal to = if gas tank is less than or equal to 1/5, turn on warning light
+>=  - Greter than or Equal to = if debt is greater than or equal to $100k file bankruptcy 
+!=  - Does not equal = If ID does not equal 5, set status to inactive
+<>  - In between = if number is in between 5 and 7 then number is 6
+LIKE - Part of a string: WHERE nursery_rhyme LIKE 'Twinkle Twinkle';
+BETWEEN- In between - if number is in between 5 and 7 then number is 6
+IS DISTINCT FROM - Same as <> but one of the inputs could be null : in order to make sure a data find is unique
+IS TRUE / FALSE - is true or false = if traffic light green IS TRUE then go foward
+IS NULL if name = null then reload form with error
+AND select peanut butter and jelly
+OR select cats or dogs
+NOT select pet where species NOT snake
+
+From the cats table, what data is returned from these queries?
+SELECT name FROM cats WHERE gender = ‘F’;
+All female cat names
+SELECT name FROM cats WHERE age <> 3;
+All names of cats whose age are not 3
+SELECT ID FROM cats WHERE name != ‘Mushi’ AND gender = ‘M’;
+Id of cats named mushi and are male
