@@ -1,0 +1,121 @@
+  
+1. How do you find related data held in two separate data tables?
+
+-Use 'JOIN'! It can pull related data from multiple tables, even more than 2.
+
+2. Explain, in your own words, the difference between an INNER JOIN, LEFT OUTER JOIN, and RIGHT OUTER JOIN. Give a real-world example for each.
+
+INNER JOIN: selects all rows from both participating tables as long as there is a match between the columns.
+-What do these 2 people have in common? Where are all of the matches/ placed orders/ etc.
+
+LEFT OUTER JOIN: returns all records from table one, plus the matched records from table 2. If there is no match, the result is 'null' in table 2 column.
+-From a customer table and order table, select all customers, and any orders they may or may not have.
+
+RIGHT OUTER JOIN: returns all results from table two, plus the matched records from table 1. If there is no match, the result is 'null' in table 1 column.
+-Could be used to show all assignments, even the ones that haven't been assigned yet.
+
+3. Define primary key and foreign key. Give a real-world example for each.
+-Primary key: key native to table; foreign key is the key that is included in another table so that a JOIN can be made.
+
+Employee table: employee id would be the primary key
+Payroll table: employee id would be the foreign key here, BUT this table would also have its own primary key as well.
+
+4. Define aliasing.
+
+-replacing a table name with a short variable, usually a single letter.
+
+5. Change this query so that you are using aliasing:
+SELECT professor.name, compensation.salary,
+compensation.vacation_days FROM professor 
+JOIN compensation 
+ON professor.id =
+compensation.professor_id;
+---------------------------------
+SELECT p.name, c.salary, c.vacation_days
+FROM professor AS p
+JOIN compensation AS c
+ON p.id = c.professor_id;
+---------------------------------
+6. Why would you use a NATURAL JOIN? Give a real-world example.
+
+-You would use NATURAL JOIN when you want to combine two tables that have columns with the same names. The data from the columns are combined into one new column and the data from both tables are matched up.
+
+Example: you have one table of foods, and another table of companies. On each table, there is a company_id column. You use NATURAL JOIN to create a new table that has data from both tables, and the company_id columns are 'merged' into one. The rest of the data is organized accordingly.
+
+
+7. Using this Employee schema and data, write queries to find the following information:
+a. List all employees and all shifts.
+
+SELECT employees.*, shifts.date, shifts.start_time, shifts.end_time
+FROM employees
+FULL OUTER JOIN scheduled_shifts
+ON scheduled_shifts.employee_id = employees.id
+FULL OUTER JOIN shifts
+ON shifts.id = scheduled_shifts.shift_id;
+
+8. Using this Adoption schema and data, please write queries to retrieve the following information and include the results:
+a. Create a list of all volunteers. If the volunteer is fostering a dog, include each dog as well.
+
+SELECT volunteers.first_name, volunteers.last_name, dogs.name 
+FROM volunteers 
+LEFT OUTER JOIN dogs 
+ON volunteers.foster_dog_id = dogs.id;
+
+
+b. The cat's name, adopter's name, and adopted date for each cat adopted within the past month to be displayed as part of the "Happy Tail" social media promotion which posts recent successful adoptions.
+
+SELECT cats.name, a.first_name, a.last_name, ca.date 
+FROM cats 
+JOIN cat_adoptions AS ca ON cats.id = ca.cat_id
+JOIN adopters AS a ON a.id = ca.adopter_id
+WHERE ca.date > CURRENT_DATE - INTERVAL '30 DAYS';
+
+c. Create a list of adopters who have not yet chosen a dog to adopt.
+
+SELECT adopters.*
+FROM adopters
+LEFT JOIN dog_adoptions
+ON adopters.id = dog_adoptions.adopter_id
+WHERE dog_adoptions.adopter_id IS NULL;
+
+d. Lists of all cats and all dogs who have not been adopted.
+
+ SELECT cats.name 
+ FROM cats
+ LEFT JOIN cat_adoptions
+ ON cat_adoptions.cat_id=cats.id
+ WHERE cat_adoptions.adopter_id IS NULL;
+ 
+ SELECT dogs.name 
+ FROM dogs
+ LEFT JOIN dog_adoptions
+ ON dog_adoptions.dog_id=dogs.id
+ WHERE dog_adoptions.adopter_id IS NULL;
+
+e. The name of the person who adopted Rosco.
+
+SELECT a.first_name, a.last_name
+FROM dogs
+JOIN dog_adoptions AS da ON dogs.id = da.dog_id
+JOIN adopters AS a ON a.id = da.adopter_id
+WHERE dogs.name = 'Rosco';
+
+9. Using this Library schema and data, write queries applying the following scenarios and include the results:
+a. To determine if the library should buy more copies of a given book, please provide the names and position, in order, of all of the patrons with a hold (request for a book with all copies checked out) on "Advanced Potion-Making".
+
+SELECT patrons.name, holds.rank
+FROM patrons
+JOIN holds ON patrons.id = holds.patron_id
+JOIN books USING (isbn)
+WHERE books.title = 'Advanced Potion-Making'
+ORDER BY holds.rank;
+
+
+b. List all of the library patrons. If they have one or more books checked out, list the books with the patrons.
+
+SELECT patrons.name, books.*, transactions.checked_out_date, transactions.checked_in_date
+FROM patrons
+LEFT OUTER JOIN transactions
+ON patrons.id = transactions.patron_id
+LEFT OUTER JOIN books USING (isbn)
+ORDER BY patrons.name;
